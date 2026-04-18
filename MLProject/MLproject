@@ -1,0 +1,9 @@
+name: heart_disease_mlflow_project
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      data_path: {type: str, default: "preprocessing_dataset_name/cleaned_dataset.csv"}
+    command: "python modeling.py --data_path {data_path}"
