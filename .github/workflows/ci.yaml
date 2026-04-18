@@ -14,6 +14,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-dev build-essential
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -21,9 +26,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mlflow
-          pip install scikit-learn pandas numpy joblib
+          python -m pip install --upgrade pip
+          pip install mlflow scikit-learn pandas numpy joblib
 
       - name: Run MLflow project
         run: |
-          mlflow run MLProject --env-manager=local
+          mlflow run ./MLProject \
+            -P data_path="preprocessing_dataset_name/heart_clean.csv" \
+            --env-manager=local
