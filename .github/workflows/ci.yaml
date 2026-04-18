@@ -26,4 +26,4 @@ jobs:
 
       - name: Run MLflow project
         run: |
-          mlflow run MLProject -P data_path="MLProject/preprocessing_dataset_name/cleaned_dataset.csv"
+          mlflow run MLProject --env-manager=local
